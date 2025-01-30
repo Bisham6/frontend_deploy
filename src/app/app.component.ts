@@ -13,9 +13,5 @@ export class AppComponent {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.getData().subscribe({
-      next: (res:any)=> this.apiMessage = res.message,
-      error: (e:any) => console.error(e)
-    });
   }
 }

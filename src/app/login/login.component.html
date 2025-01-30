@@ -1,0 +1,67 @@
+<h1 class="text-center">{{headerTitle}}</h1>
+<div class="container-sm">
+    <div class="d-flex flex-row-reverse">
+      <!-- Buttons to toggle between login and register -->
+      <small class="text-primary p-2 pe-auto" (click)="toggleForm(true)"><p class="pe-auto">Log In</p></small>
+      <small class="text-primary p-2 pe-auto" (click)="toggleForm(false)">Register</small>
+    </div>
+  
+    <!-- Conditionally display login form or register form -->
+    <form class="d-grid gap-3" *ngIf="isLoginForm; else registerForm" [formGroup]="loginInfo" (ngSubmit)="submitForm('loginForm')">
+      <div class="form-group">
+        <label class="font-weight-bold" for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control m-b-2" id="exampleInputEmail1" formControlName="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <div *ngIf="loginInfo.get('email')?.invalid && loginInfo.get('email')?.touched">
+          <small class="text-danger" *ngIf="loginInfo.get('email')?.hasError('required')">Email is required</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password">
+        <div *ngIf="loginInfo.get('password')?.invalid && loginInfo.get('password')?.touched">
+          <small class="text-danger" *ngIf="loginInfo.get('password')?.hasError('required')">Password is required</small>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="loginInfo.invalid">Log In</button>
+    </form>
+  
+    <!-- Register form (displayed when isLoginForm is false) -->
+    <ng-template #registerForm>
+      <form class="d-grid gap-3" [formGroup]="registerInfo" (ngSubmit)="submitForm('registrationForm')">
+        <div class="form-group">
+          <label class="font-weight-bold" for="name">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter name">
+          <div *ngIf="registerInfo.get('name')?.invalid && registerInfo.get('name')?.touched">
+            <small class="text-danger" *ngIf="registerInfo.get('name')?.hasError('required')">Name is required</small>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" class="form-control" id="role" formControlName="role" placeholder="Enter role">
+          <div *ngIf="registerInfo.get('role')?.invalid && registerInfo.get('role')?.touched">
+            <small class="text-danger" *ngIf="registerInfo.get('role')?.hasError('required')">Role is required</small>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label class="font-weight-bold" for="email">Email address</label>
+          <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Enter email">
+          <div *ngIf="registerInfo.get('email')?.invalid && registerInfo.get('email')?.touched">
+            <small class="text-danger" *ngIf="registerInfo.get('email')?.hasError('required')">Email is required</small>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label class="font-weight-bold" for="password">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter password">
+          <div *ngIf="registerInfo.get('password')?.invalid && registerInfo.get('password')?.touched">
+            <small class="text-danger" *ngIf="registerInfo.get('password')?.hasError('required')">Password is required</small>
+          </div>
+        </div>
+  
+        <button  type="submit" class="btn btn-primary" [disabled]="registerInfo.invalid">Register</button>
+      </form>
+    </ng-template>
+  </div>
+  

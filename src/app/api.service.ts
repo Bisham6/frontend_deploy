@@ -14,4 +14,16 @@ export class ApiService {
   getData(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
+
+  userPost(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}register`, data);
+  }
+
+  loginUser(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}login`, data);
+  }
+
+  getAllUsers():Observable<any>{
+    return this.http.get(`${this.apiUrl}users`)
+  }
 }

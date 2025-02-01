@@ -55,14 +55,17 @@ export class LoginComponent implements OnInit {
     }
 
     else if(formType === 'loginForm'){
-      this.apiService.loginUser(this.loginInfo.value).subscribe((data: any) => {
-        if(data.token){
-          this.authService.setToken(data.token);
-          this.router.navigate(['/dashboard']);
+      this.apiService.loginUser(this.loginInfo.value).subscribe({
+        next: (data: any) => {
+          if (data.token) {
+            this.authService.setToken(data.token);
+            this.router.navigate(['/dashboard']);
+          }
+        },
+        error: (error) => {
+          console.log(error);
+          alert('Invalid login credentials');
         }
-      }, (error) => {
-        console.log(error);
-        alert('Invalid login credentials');
       });
     }
 

@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
   submitForm(formType:string){
     if(formType === 'registrationForm'){
       this.apiService.userPost(this.registerInfo.value).subscribe((data: any) => {
-        console.log(data);
       });
     }
 

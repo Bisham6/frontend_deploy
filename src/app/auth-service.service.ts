@@ -21,13 +21,12 @@ export class AuthServiceService {
 
   //get token
   getToken() {
-    console.log("authh thoken :-- ", localStorage.getItem('token'));
     return localStorage.getItem('token');
   }
 
   //check if user is logged in  
   isLoggedIn() {
-    return this.loggedIn.asObservable();
+    return this.loggedIn.value;
   }
 
   //Logout user
